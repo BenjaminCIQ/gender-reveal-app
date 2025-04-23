@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const API_URL = 'http://127.0.0.1:5000';
+const API_URL = 'http://192.168.0.26:5000';
 
 function AdminPage() {
   const [adminKey, setAdminKey] = useState('');
@@ -43,49 +43,38 @@ function AdminPage() {
     }
   };
 
-  // Add this function to AdminPage.js
-    const handleReset = async () => {
-        if (!adminKey) {
-        setError('Please enter the admin key');
-        return;
+  const handleReset = async () => {
+    if (!adminKey) {
+      setError('Please enter the admin key');
+      return;
+    }
+    
+    if (window.confirm('Are you sure you want to reset ALL votes and reveal status? This cannot be undone!')) {
+      setLoading(true);
+      try {
+        await axios.post(`${API_URL}/api/admin/reset`, {
+          admin_key: adminKey
+        });
+        alert('Data reset successfully!');
+        navigate('/');
+      } catch (err) {
+        if (err.response && err.response.status === 401) {
+          setError('Invalid admin key');
+        } else {
+          setError('Failed to reset data. Please try again.');
         }
-        
-        if (window.confirm('Are you sure you want to reset ALL votes and reveal status? This cannot be undone!')) {
-        setLoading(true);
-        try {
-            await axios.post(`${API_URL}/api/admin/reset`, {
-            admin_key: adminKey
-            });
-            alert('Data reset successfully!');
-            navigate('/');
-        } catch (err) {
-            if (err.response && err.response.status === 401) {
-            setError('Invalid admin key');
-            } else {
-            setError('Failed to reset data. Please try again.');
-            }
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
-        }
-    };
-  
-  // Then add this button below the reveal button in the JSX
-  <button 
-    type="button" 
-    className="reset-btn" 
-    onClick={handleReset} 
-    disabled={loading}
-  >
-    Reset All Data
-  </button>
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
 
   return (
     <div className="admin-container">
       <h2>Gender Reveal Admin</h2>
       <div className="warning">
-        <p>⚠️ Warning: This action cannot be undone!</p>
+        <p>⚠️ Warning: The reveal action cannot be undone!</p>
         <p>Once you reveal the gender, all participants will see the result.</p>
       </div>
       
@@ -124,9 +113,20 @@ function AdminPage() {
         
         {error && <p className="error">{error}</p>}
         
-        <button type="submit" className="reveal-btn" disabled={loading}>
-          {loading ? 'Revealing...' : 'Reveal Gender Now'}
-        </button>
+        <div className="admin-buttons">
+          <button type="submit" className="reveal-btn" disabled={loading}>
+            {loading ? 'Revealing...' : 'Reveal Gender Now'}
+          </button>
+          
+          <button 
+            type="button" 
+            className="reset-btn" 
+            onClick={handleReset} 
+            disabled={loading}
+          >
+            Reset All Data
+          </button>
+        </div>
       </form>
     </div>
   );

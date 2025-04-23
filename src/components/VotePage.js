@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { findAllByTestId } from '@testing-library/dom';
 
-const API_URL = 'http://localhost:5000';
+const API_URL = 'http://192.168.0.26:5000';
 
 function VotePage() {
   const [name, setName] = useState('');
@@ -10,6 +11,29 @@ function VotePage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user has already voted
+    const hasVoted = localStorage.getItem('gender_reveal_voted');
+    if (false) {
+      navigate('/results');
+      return;
+    }
+    
+    // Also check if voting is still open
+    const checkVotingStatus = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/results`);
+        if (response.data.revealed) {
+          navigate('/results');
+        }
+      } catch (err) {
+        console.error('Failed to check voting status:', err);
+      }
+    };
+    
+    checkVotingStatus();
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,10 +49,23 @@ function VotePage() {
         name: name || 'Anonymous',
         vote
       });
+      
+      // Save to local storage that user has voted
+      //localStorage.setItem('gender_reveal_voted', 'true');
+      //localStorage.setItem('gender_reveal_name', name || 'Anonymous');
+      
       navigate('/results');
     } catch (err) {
-      setError('Failed to submit your vote. Please try again.');
-      console.error(err);
+      if (err.response && err.response.status === 403) {
+        setError('Voting has closed as gender has been revealed');
+        setTimeout(() => navigate('/results'), 2000);
+      } else if (err.response && err.response.status === 409) {
+        setError('You have already voted');
+        setTimeout(() => navigate('/results'), 2000);
+      } else {
+        setError('Failed to submit your vote. Please try again.');
+        console.error(err);
+      }
     } finally {
       setLoading(false);
     }
