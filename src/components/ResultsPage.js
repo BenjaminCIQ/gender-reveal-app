@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PieChart, Pie } from 'recharts';
 
+const API_BASE =
+  process.env.NODE_ENV === 'production'
+    ? '/api'
+    : 'http://localhost:5000/api';
+
 function ResultsPage() {
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(true);

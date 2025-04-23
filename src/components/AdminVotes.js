@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
+const API_BASE =
+  process.env.NODE_ENV === 'production'
+    ? '/api'
+    : 'http://localhost:5000/api';
+
 function AdminVotesPage() {
   const [votes, setVotes] = useState([]);
   const [loading, setLoading] = useState(true);

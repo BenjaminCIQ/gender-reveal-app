@@ -5,7 +5,7 @@ import axios from 'axios';
 const API_BASE =
   process.env.NODE_ENV === 'production'
     ? '/api'
-    : 'http://localhost:5000/api';
+    : ' http://127.0.0.1:5000/api';
 
 function VotePage() {
   const [name, setName] = useState('');
