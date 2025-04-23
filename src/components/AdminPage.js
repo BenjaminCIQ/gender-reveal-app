@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+const API_BASE = process.env.NODE_ENV === 'production'
+    ? '/api'
+    : 'http://localhost:5000/api';
+
 function AdminPage() {
   const [adminKey, setAdminKey] = useState('');
   const [gender, setGender] = useState('');

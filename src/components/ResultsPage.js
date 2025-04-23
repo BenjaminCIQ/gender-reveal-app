@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PieChart, Pie } from 'recharts';
 
-const API_BASE =
-  process.env.NODE_ENV === 'production'
+const API_BASE = process.env.NODE_ENV === 'production'
     ? '/api'
     : 'http://localhost:5000/api';
 

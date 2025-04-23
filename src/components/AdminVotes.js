@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const API_BASE =
-  process.env.NODE_ENV === 'production'
+const API_BASE = process.env.NODE_ENV === 'production'
     ? '/api'
     : 'http://localhost:5000/api';
 
