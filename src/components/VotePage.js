@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+const API_BASE =
+  process.env.NODE_ENV === 'production'
+    ? '/api'
+    : 'http://localhost:5000/api';
+
 function VotePage() {
   const [name, setName] = useState('');
   const [vote, setVote] = useState('');
@@ -20,7 +25,7 @@ function VotePage() {
     // Also check if voting is still open
     const checkVotingStatus = async () => {
       try {
-        const response = await axios.get(`/results`);
+        const response = await axios.get(`${API_BASE}/results`);
         if (response.data.revealed) {
           navigate('/results');
         }
@@ -42,7 +47,7 @@ function VotePage() {
     
     setLoading(true);
     try {
-      await axios.post(`api/vote`, {
+      await axios.post(`${API_BASE}/vote`, {
         name: name || 'Anonymous',
         vote
       });
