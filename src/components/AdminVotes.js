@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-const API_URL = process.env.REACT_APP_API_URL;
-
 function AdminVotesPage() {
   const [votes, setVotes] = useState([]);
   const [loading, setLoading] = useState(true);

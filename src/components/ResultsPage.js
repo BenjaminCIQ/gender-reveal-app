@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PieChart, Pie } from 'recharts';
 
-const API_URL = process.env.REACT_APP_API_URL;
-
 function ResultsPage() {
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(true);
