@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const API_BASE =
-  process.env.NODE_ENV === 'production'
-    ? '/api'
-    : ' http://127.0.0.1:5000/api';
+const API_BASE = process.env.NODE_ENV === 'production' 
+  ? '/api' 
+  : 'http://127.0.0.1:5000/api';
 
 function VotePage() {
   const [name, setName] = useState('');

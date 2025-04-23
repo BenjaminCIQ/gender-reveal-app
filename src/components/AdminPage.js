@@ -24,7 +24,7 @@ function AdminPage() {
     
     setLoading(true);
     try {
-      await axios.post(`/api/admin/reveal`, {
+      await axios.post(`${API_BASE}/admin/reveal`, {
         admin_key: adminKey,
         gender
       });
@@ -50,7 +50,7 @@ function AdminPage() {
     if (window.confirm('Are you sure you want to reset ALL votes and reveal status? This cannot be undone!')) {
       setLoading(true);
       try {
-        await axios.post(`/api/admin/reset`, {
+        await axios.post(`${API_BASE}/admin/reset`, {
           admin_key: adminKey
         });
         alert('Data reset successfully!');

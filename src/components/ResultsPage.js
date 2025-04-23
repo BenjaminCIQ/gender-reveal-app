@@ -16,7 +16,7 @@ function ResultsPage() {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const response = await axios.get(`/results`);
+        const response = await axios.get(`${API_BASE}/results`);
         setResults(response.data);
         
         // Create confetti effect when gender is revealed

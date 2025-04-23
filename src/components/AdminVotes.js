@@ -11,7 +11,7 @@ function AdminVotesPage() {
 
   const fetchVotes = async () => {
     setLoading(true);
-    const response = await fetch(`api/votes`);
+    const response = await fetch(`${API_BASE}/votes`);
     const data = await response.json();
     setVotes(data);
     setLoading(false);
@@ -19,7 +19,7 @@ function AdminVotesPage() {
 
   const deleteVote = async (id) => {
     if (!window.confirm('Are you sure you want to delete this vote?')) return;
-    await fetch(`api/delete-vote`, {
+    await fetch(`${API_BASE}/delete-vote`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id }),
