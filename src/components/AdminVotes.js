@@ -43,6 +43,7 @@ function AdminVotesPage() {
               <th>Name</th>
               <th>Vote</th>
               <th>IP Address</th>
+              <th>Voter ID</th>
               <th>Timestamp</th>
               <th>Actions</th>
             </tr>
