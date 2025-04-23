@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { findAllByTestId } from '@testing-library/dom';
 
-const API_URL = 'http://192.168.0.26:5000';
+const API_URL = process.env.REACT_APP_API_URL;
 
 function VotePage() {
   const [name, setName] = useState('');
@@ -23,7 +23,7 @@ function VotePage() {
     // Also check if voting is still open
     const checkVotingStatus = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/results`);
+        const response = await axios.get(`/api/results`);
         if (response.data.revealed) {
           navigate('/results');
         }
@@ -45,7 +45,7 @@ function VotePage() {
     
     setLoading(true);
     try {
-      await axios.post(`${API_URL}/api/vote`, {
+      await axios.post(`/api/vote`, {
         name: name || 'Anonymous',
         vote
       });

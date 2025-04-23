@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PieChart, Pie } from 'recharts';
 
-const API_URL = 'http://192.168.0.26:5000'
+const API_URL = process.env.REACT_APP_API_URL;
 
 function ResultsPage() {
   const [results, setResults] = useState(null);
@@ -13,7 +13,7 @@ function ResultsPage() {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/results`);
+        const response = await axios.get(`/api/results`);
         setResults(response.data);
         
         // Create confetti effect when gender is revealed

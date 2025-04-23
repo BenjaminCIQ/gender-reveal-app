@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const API_URL = 'http://192.168.0.26:5000';
+const API_URL = process.env.REACT_APP_API_URL;
 
 function AdminVotesPage() {
   const [votes, setVotes] = useState([]);
@@ -8,7 +8,7 @@ function AdminVotesPage() {
 
   const fetchVotes = async () => {
     setLoading(true);
-    const response = await fetch(`${API_URL}/votes`);
+    const response = await fetch(`/votes`);
     const data = await response.json();
     setVotes(data);
     setLoading(false);
@@ -16,7 +16,7 @@ function AdminVotesPage() {
 
   const deleteVote = async (id) => {
     if (!window.confirm('Are you sure you want to delete this vote?')) return;
-    await fetch(`${API_URL}/delete-vote`, {
+    await fetch(`api/delete-vote`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id }),

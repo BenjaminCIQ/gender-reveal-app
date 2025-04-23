@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const API_URL = 'http://192.168.0.26:5000';
+const API_URL = process.env.REACT_APP_API_URL;
 
 function AdminPage() {
   const [adminKey, setAdminKey] = useState('');
@@ -26,7 +26,7 @@ function AdminPage() {
     
     setLoading(true);
     try {
-      await axios.post(`${API_URL}/api/admin/reveal`, {
+      await axios.post(`/api/admin/reveal`, {
         admin_key: adminKey,
         gender
       });
@@ -52,7 +52,7 @@ function AdminPage() {
     if (window.confirm('Are you sure you want to reset ALL votes and reveal status? This cannot be undone!')) {
       setLoading(true);
       try {
-        await axios.post(`${API_URL}/api/admin/reset`, {
+        await axios.post(`/api/admin/reset`, {
           admin_key: adminKey
         });
         alert('Data reset successfully!');
