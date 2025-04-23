@@ -6,7 +6,7 @@ function AdminVotesPage() {
 
   const fetchVotes = async () => {
     setLoading(true);
-    const response = await fetch(`/votes`);
+    const response = await fetch(`api/votes`);
     const data = await response.json();
     setVotes(data);
     setLoading(false);

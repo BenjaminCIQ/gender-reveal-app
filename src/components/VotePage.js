@@ -42,7 +42,7 @@ function VotePage() {
     
     setLoading(true);
     try {
-      await axios.post(`/vote`, {
+      await axios.post(`api/vote`, {
         name: name || 'Anonymous',
         vote
       });
