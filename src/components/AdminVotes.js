@@ -54,6 +54,7 @@ function AdminVotesPage() {
                 <td>{vote.name}</td>
                 <td>{vote.vote}</td>
                 <td>{vote.ip_address}</td>
+                <td>{vote.voter_id}</td>
                 <td>{new Date(vote.timestamp).toLocaleString()}</td>
                 <td>
                   <button onClick={() => deleteVote(vote.id)}>Delete</button>
