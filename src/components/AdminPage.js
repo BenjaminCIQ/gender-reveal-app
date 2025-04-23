@@ -96,17 +96,17 @@ function AdminPage() {
           <div className="gender-options">
             <button
               type="button"
-              className={`gender-btn ${gender === 'boy' ? 'selected' : ''}`}
-              onClick={() => setGender('boy')}
-            >
-              It's a BOY! 💙
-            </button>
-            <button
-              type="button"
               className={`gender-btn ${gender === 'girl' ? 'selected' : ''}`}
               onClick={() => setGender('girl')}
             >
               It's a GIRL! 💖
+            </button>
+            <button
+              type="button"
+              className={`gender-btn ${gender === 'boy' ? 'selected' : ''}`}
+              onClick={() => setGender('boy')}
+            >
+              It's a BOY! 💙
             </button>
           </div>
         </div>

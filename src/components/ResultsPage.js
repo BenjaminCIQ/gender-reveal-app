@@ -46,7 +46,7 @@ function ResultsPage() {
 
     fetchResults();
     // Set up polling for updates every 5 seconds
-    const interval = setInterval(fetchResults, 5000);
+    const interval = setInterval(fetchResults, 1000);
     return () => clearInterval(interval);
   }, [confetti.length]);
 
@@ -112,12 +112,9 @@ function ResultsPage() {
         // Live results view
         <div className="live-results">
           <h2>Live Voting Results</h2>
-          <div className="results-summary">
-            <p>Total votes: {results.total_votes}</p>
-          </div>
           
           <div className="chart-container">
-            <PieChart width={300} height={300}>
+            <PieChart width={400} height={400}>
               <Pie
                 data={chartData}
                 dataKey="value"
@@ -132,10 +129,10 @@ function ResultsPage() {
           
           <div className="vote-counts">
             <div className="boy-votes">
-              <span className="vote-label">Boy:</span> {results.boy} votes ({results.total_votes ? ((results.boy / results.total_votes) * 100).toFixed(1) : 0}%)
+              <span className="vote-label">Boy:</span> {results.boy} votes
             </div>
             <div className="girl-votes">
-              <span className="vote-label">Girl:</span> {results.girl} votes ({results.total_votes ? ((results.girl / results.total_votes) * 100).toFixed(1) : 0}%)
+              <span className="vote-label">Girl:</span> {results.girl} votes
             </div>
           </div>
           

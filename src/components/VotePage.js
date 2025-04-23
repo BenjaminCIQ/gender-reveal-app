@@ -15,7 +15,7 @@ function VotePage() {
   useEffect(() => {
     // Check if user has already voted
     const hasVoted = localStorage.getItem('gender_reveal_voted');
-    if (false) {
+    if (hasVoted) {
       navigate('/results');
       return;
     }
@@ -73,7 +73,7 @@ function VotePage() {
 
   return (
     <div className="vote-container">
-      <h2>Make Your Prediction!</h2>
+      <h2>What do you think Babaloo is?</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Your Name (optional):</label>
@@ -87,21 +87,21 @@ function VotePage() {
         </div>
         
         <div className="form-group">
-          <h3>What's your prediction?</h3>
+          <h3>What's your guess?</h3>
           <div className="vote-options">
-            <button
-              type="button"
-              className={`vote-btn ${vote === 'boy' ? 'selected' : ''}`}
-              onClick={() => setVote('boy')}
-            >
-              It's a BOY! 💙
-            </button>
             <button
               type="button"
               className={`vote-btn ${vote === 'girl' ? 'selected' : ''}`}
               onClick={() => setVote('girl')}
             >
               It's a GIRL! 💖
+            </button>
+            <button
+              type="button"
+              className={`vote-btn ${vote === 'boy' ? 'selected' : ''}`}
+              onClick={() => setVote('boy')}
+            >
+              It's a BOY! 💙
             </button>
           </div>
         </div>

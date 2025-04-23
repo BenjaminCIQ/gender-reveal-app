@@ -72,23 +72,23 @@ body {
   }
   
   .vote-btn:first-child, .gender-btn:first-child {
+    background-color: #FFB6C1;
+    color: white;
+  }
+
+  .vote-btn:last-child, .gender-btn:last-child {
     background-color: #89CFF0;
     color: white;
   }
   
-  .vote-btn:last-child, .gender-btn:last-child {
-    background-color: #FFB6C1;
-    color: white;
-  }
-  
   .vote-btn:hover, .gender-btn:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   
   .vote-btn.selected, .gender-btn.selected {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    transform: scale(1.09);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
   }
   
   .submit-btn, .reveal-btn {
@@ -120,6 +120,10 @@ body {
   
   .chart-container {
     margin: 30px auto;
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center;     /* Vertical centering (optional) */
+    height: 300px;           /* Optional: ensures there's vertical space */
   }
   
   .vote-counts {
@@ -311,4 +315,33 @@ body {
     height: 100%;
     pointer-events: none;
     z-index: 100;
+  }
+
+  .admin-votes table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .admin-votes th,
+  .admin-votes td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .admin-votes th {
+    background-color: #f4f4f4;
+  }
+  
+  .admin-votes button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+  
+  .admin-votes button:hover {
+    background-color: #c0392b;
   }
